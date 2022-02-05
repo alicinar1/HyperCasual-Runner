@@ -8,7 +8,7 @@ namespace Runner.Environment
     {
         private void OnTriggerEnter(Collider other)
         {
-            transform.position += new Vector3(0, 0, 40);
+            transform.position += new Vector3(0, 0, 80);
             Debug.Log(other.gameObject.name);
         }
     }
