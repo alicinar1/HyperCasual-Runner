@@ -23,7 +23,7 @@ namespace Utilities.Camera
 			_target = aTransform;
 		}
 
-		private void FixedUpdate()
+		private void Update()
 		{
 			if (_target != null)
 				_myTransform.position = Vector3.Lerp(_myTransform.position, _target.position + _targetOffset, _moveSpeed * Time.deltaTime);

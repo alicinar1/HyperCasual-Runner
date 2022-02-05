@@ -15,9 +15,36 @@ namespace Utilities.ObjectPool
 
         public void CreateObjectPool()
         {
+            if (gameObjectArray.Length == 1)
+            {
+                CreateSingleObjectPool();
+            }
+            else if (gameObjectArray.Length > 1)
+            {
+                CreateRandomObjectPool();
+            }
+            else
+            {
+                Debug.Log("Error! Add objects to the object pool!");
+            }
+        }
+
+        public void CreateRandomObjectPool()
+        {
             for (int i = 0; i < poolSize; i++)
             {
                 var obj = Instantiate(gameObjectArray[Random.Range(0, gameObjectArray.Length)], Vector3.zero, Quaternion.identity, parent);
+                obj.gameObject.SetActive(false);
+                objectQueue.Enqueue(obj);
+            }
+        }
+
+        public void CreateSingleObjectPool()
+        {
+            Debug.Log(poolSize);
+            for (int i = 0; i < poolSize; i++)
+            {
+                var obj = Instantiate(gameObjectArray[0], Vector3.zero, Quaternion.identity, parent);
                 obj.gameObject.SetActive(false);
                 objectQueue.Enqueue(obj);
             }

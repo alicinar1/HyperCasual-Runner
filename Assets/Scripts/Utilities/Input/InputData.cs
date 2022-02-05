@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utilities.InputControl
 {
-    [CreateAssetMenu(menuName = "Top Down Shooter/Input/Player Input Data")]
+    [CreateAssetMenu(menuName = "Utilities/Input/Player Input Data")]
     public class InputData : AbstractInputData
     {
 
