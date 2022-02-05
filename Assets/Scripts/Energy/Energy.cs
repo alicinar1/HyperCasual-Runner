@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Runner.PlayerCont;
+using System;
 
 namespace Runner.Energy
 {
     public class Energy : MonoBehaviour
     {
         [SerializeField] private Ease animEase;
-        [SerializeField] private TweenCallback callback;
 
         private Sequence _aliveLoopSequence;
         private Sequence _disableLoopSequence;
+
+        public static event Action OnEnergyCountUp;
 
         private void Awake()
         {
@@ -20,8 +23,7 @@ namespace Runner.Energy
         }
         private void OnTriggerEnter(Collider other)
         {
-            _aliveLoopSequence.Pause();
-            TakeAnimation();
+            TakeEnergy();
         }
 
         private void OnEnable()
@@ -52,11 +54,18 @@ namespace Runner.Energy
             _aliveLoopSequence.Play();
         }
 
+        private void TakeEnergy()
+        {
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            OnEnergyCountUp?.Invoke();
+            _aliveLoopSequence.Pause();
+            TakeAnimation();
+        }
+
         private void TakeAnimation()
         {
             _disableLoopSequence.Play();
             Invoke("SetInactieve", 0.8f);
-
         }
 
         private void SetInactieve()
@@ -64,5 +73,7 @@ namespace Runner.Energy
             _disableLoopSequence.Pause();
             gameObject.SetActive(false);
         }
+
+
     }
 }
