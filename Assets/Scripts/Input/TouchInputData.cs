@@ -4,6 +4,7 @@ using UnityEngine;
 using Utilities.InputControl;
 using UnityEngine.InputSystem;
 using System;
+using Utilities.InputControl;
 
 namespace Runner.InputControl
 {
@@ -27,9 +28,9 @@ namespace Runner.InputControl
         [SerializeField] private bool holdBaseInputActieve;
         [SerializeField] private bool isHold;
 
+
         public override void ProcessInput()
         {
-            
                 if (swipeBaseInputActieve)
                 {
                     SwipeBaseControl();
